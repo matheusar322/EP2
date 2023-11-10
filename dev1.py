@@ -36,3 +36,40 @@ def inidica_posicao(sorteada, especulada):
                 lista_posicao.append(2)
             i += 1
     return lista_posicao
+print(" ===========================")
+print("|                           |")
+print("| Bem-vindo ao Insper Termo |")
+print("|                           |")
+print(" ==== Design de Software ===")
+print("Comandos: desisto")
+print("Regras:")
+print("  - Você tem 6 tentativas para acertar uma palavra aleatória de 5 letras")
+print("  - A cada tentativa, a palavra testada terá suas letras coloridas conforme:")
+print("    Azul   : a letra está na posição correta;")
+print("    Amarelo: a palavra tem a letra, mas está na posição errada;")
+print("    Cinza: a palavra não tem a letra.")
+print("  - Os acentos são ignorados;")
+print("  - As palavras podem possuir letras repetidas.")
+print("Sorteando uma palavra...")
+print("Já tenho uma palavra! Tente adivinhá-la!")
+print("Você tem 6 tentaviva(s)")
+print("Qual seu palpite?")
+
+chutes = True
+
+filtro = filtra(PALAVRAS, 5)
+
+inicializador = inicializa(filtro)
+
+tentativa = input("Digite uma palavra:")
+tentativas = 1
+
+while chutes:
+    if tentativa == inicializador['sorteada']:
+        print("Parabéns!! Você acertou!! :)")
+        break
+    else:
+        print(inidica_posicao(inicializador['sorteada'],tentativa))
+        tentativa += 1
+
+
