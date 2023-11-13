@@ -1,5 +1,6 @@
-
 import random
+import string
+from LISTA_PALAVRAS import *
 def filtra(lista, numero):
     lista_nova = []
     for palavra in lista:
@@ -17,7 +18,7 @@ def inicializa(lista_palavras):
     dic['tentativas'] = len(lista_palavras[0]) + 1
     return dic
 
-def inidica_posicao(sorteada, especulada):
+def indica_posicao(sorteada, especulada):
     lista_posicao = []
     if len(sorteada) != len(especulada):
         return lista_posicao
@@ -33,6 +34,7 @@ def inidica_posicao(sorteada, especulada):
                 lista_posicao.append(2)
             i += 1
     return lista_posicao
+
 print(" ===========================")
 print("|                           |")
 print("| Bem-vindo ao Insper Termo |")
@@ -58,15 +60,32 @@ filtro = filtra(PALAVRAS, 5)
 
 inicializador = inicializa(filtro)
 
-tentativa = input("Digite uma palavra:")
 tentativas = 1
 
-while chutes:
-    if tentativa == inicializador['sorteada']:
-        print("Parabéns!! Você acertou!! :)")
-        break
-    else:
-        print(inidica_posicao(inicializador['sorteada'],tentativa))
-        tentativa += 1
+correta = inicializador['sorteada']
 
+def verificacao(correta, tentativa):
+    resultado = indica_posicao(correta, tentativa)
+    ajuda = []
+    for a, b in enumerate(resultado):
+        if b == 0:
+            ajuda.append('\033[34m' + tentativa[a]) 
+        elif b == 1:
+            ajuda.append('\033[33m' + tentativa[a])
+        else:
+            ajuda.append('\033[37m' + tentativa[a])
+    return ' '.join(ajuda)
 
+def jogo():
+    while chutes == True and tentativas > 0 and tentativas <= 6:
+        tentativa = input("Digite uma palavra:").lower()
+        if tentativa == correta:
+            print("Parabéns!! Você acertou!! :)")
+            break
+        if tentativa == 'desisto':
+            print("A palavra correta era: {0}.".format(correta))
+            break
+        else:
+            resultado = verificacao(correta, tentativa)
+            print("Palavra errada. Dicas: {0}".format(resultado))
+            tentativa += 1
