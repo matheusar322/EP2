@@ -76,9 +76,23 @@ def verificacao(correta, tentativa):
             ajuda.append('\033[37m' + tentativa[a])
     return ' '.join(ajuda)
 
-def jogo():
-    while chutes == True and tentativas > 0 and tentativas <= 6:
+def termo():
+    chutes = True
+
+    filtro = filtra(PALAVRAS, 5)
+
+    inicializador = inicializa(filtro)
+
+    tentativas = 1
+
+    correta = inicializador['sorteada']
+    while chutes == True and tentativas > 0:
         tentativa = input("Digite uma palavra:").lower()
+        if tentativas > 5:
+            print("Você perdeu! A palavra correta era: {0}.".format(correta))
+            break
+        if len(tentativa) != inicializador['n']:
+            print("Digite uma palavra de 5 letras")
         if tentativa == correta:
             print("Parabéns!! Você acertou!! :)")
             break
@@ -88,4 +102,14 @@ def jogo():
         else:
             resultado = verificacao(correta, tentativa)
             print("Palavra errada. Dicas: {0}".format(resultado))
-            tentativa += 1
+            tentativas += 1
+
+    continuacao = input("Deseja jogar novamente? (sim/não): ")
+    if continuacao.lower() == 'não':
+        chutes = False
+
+    if chutes:
+        termo()
+    else:
+        print("Obrigado por jogar!")
+termo()
