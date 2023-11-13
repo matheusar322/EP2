@@ -1,6 +1,3 @@
-from colorama import init, Fore, Back, Style
-init()
-print(f'{Fore.BLUE }matheus{Style.RESET_All}')
 
 import random
 def filtra(lista, numero):
